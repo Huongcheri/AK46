@@ -2,6 +2,7 @@
     <test name = "Chrome Browser">
         <classes>
             <class name ="theinternet.WebTableTest"/>
+            <class name ="org.example.ExerciseTest"/>
         </classes>
     </test>
 </suite>
