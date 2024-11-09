@@ -4,31 +4,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import theinternet.pages.FormAuthenticationPage;
 
-/**
- * TC01: Form  Authentication :  Login successful with valid credentials
- * Open browser
- * <p>
- * Navigate to https://the-internet.herokuapp.com/login
- * <p>
- * Fill in username with tomsmith
- * <p>
- * Fill in the password with SuperSecretPassword!
- * <p>
- * Click on Login button
- * <p>
- * And the home page is appear
- */
 public class FormAuthenticationTest {
     @Test
     void ShouldSuccessfully() {
         WebDriver driver = new ChromeDriver();
         driver.get("https://the-internet.herokuapp.com/login");
 
-        driver.findElement(By.id("username")).sendKeys("tomsmith");
-        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
-        driver.findElement(By.cssSelector("button[type=submit]")).click();
+//        driver.findElement(By.id("username")).sendKeys("tomsmith");
+//        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
+//        driver.findElement(By.cssSelector("button[type=submit]")).click();
         // visual locator string -có ý nghĩa hình dung ra duoc thao tac và ngắn nhất
+        FormAuthenticationPage login = new FormAuthenticationPage(driver);
+        login.login("tomsmith","SuperSecretPassword!");
 
         Assert.assertTrue(driver.findElement(By.className("success")).getText().contains("You logged into a secure area!"));
 
