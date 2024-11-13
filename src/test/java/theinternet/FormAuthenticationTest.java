@@ -1,53 +1,47 @@
 package theinternet;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import supports.Browser;
 import theinternet.pages.FormAuthenticationPage;
 
 public class FormAuthenticationTest {
+    @BeforeClass
+    void setUp(){
+        Browser.openBrowser("chrome");
+    }
     @Test
     void ShouldSuccessfully() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/login");
 
-//        driver.findElement(By.id("username")).sendKeys("tomsmith");
-//        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
-//        driver.findElement(By.cssSelector("button[type=submit]")).click();
-        // visual locator string -có ý nghĩa hình dung ra duoc thao tac và ngắn nhất
-        FormAuthenticationPage login = new FormAuthenticationPage(driver);
+        FormAuthenticationPage login = new FormAuthenticationPage();
+        login.open();
         login.login("tomsmith","SuperSecretPassword!");
 
-        Assert.assertTrue(driver.findElement(By.className("success")).getText().contains("You logged into a secure area!"));
-
-        driver.quit();
+        Assert.assertTrue(login.isSuccessLogin());
     }
-
     @Test
     void UsernameFail() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/login");
 
-        driver.findElement(By.id("username")).sendKeys("tomsmith01");
-        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
-        driver.findElement(By.cssSelector("button[type=submit]")).click();
+        FormAuthenticationPage login = new FormAuthenticationPage();
+        login.open();
+        login.login("tomsmith01","SuperSecretPassword!");
 
-        Assert.assertTrue(driver.findElement(By.className("error")).getText().contains("Your username is invalid!"));
+        Assert.assertTrue(login.isUsernameFai());
 
-        driver.quit();
     }
     @Test
     void PasswordFail() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/login");
 
-        driver.findElement(By.id("username")).sendKeys("tomsmith");
-        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword");
-        driver.findElement(By.cssSelector("button[type=submit]")).click();
+        FormAuthenticationPage login = new FormAuthenticationPage();
+        login.open();
+        login.login("tomsmith","SuperSecretPassword");
 
-        Assert.assertTrue(driver.findElement(By.className("error")).getText().contains("Your password is invalid!"));
-
-        driver.quit();
+        Assert.assertTrue(login.isPasswordFai());
+    }
+    @AfterClass
+    void tearDown(){
+        Browser.quit();
     }
 }

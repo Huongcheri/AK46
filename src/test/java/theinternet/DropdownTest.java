@@ -7,25 +7,12 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-/*
-
-Open browser
-
-Navigate to https://the-internet.herokuapp.com/dropdown
-
-Select "option 1"
-
-Validate "option 1" is selected
-*/
-
 public class DropdownTest {
     @Test
     void Checkbox1isSelected() {
         WebDriver driver = new ChromeDriver();
         driver.get("https://the-internet.herokuapp.com/dropdown");
         Select select = new Select(driver.findElement(By.id("dropdown")));
-//        select.selectByVisibleText("Option 1"); chon 1 option
-//        select.selectByIndex(1);
         select.selectByValue("1");
         Assert.assertTrue(driver.findElement(By.xpath("//*[@id='dropdown']/option[@value = '1']")).isSelected());
 

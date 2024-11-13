@@ -36,4 +36,9 @@ public class Browser {
             driver.quit();
         }
     }
+
+    public static WebDriver getDriver() {
+        return driver;
+    }
+
 }

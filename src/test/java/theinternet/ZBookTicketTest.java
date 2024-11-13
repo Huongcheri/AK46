@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class BookTicketTest {
+public class ZBookTicketTest {
 
     @Test
     void selectADate(){

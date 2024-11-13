@@ -1,27 +1,35 @@
 package theinternet;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import supports.Browser;
+import theinternet.pages.Ak46Page;
 
 public class DragDropTest {
+    @BeforeClass
+    void setUp(){
+        Browser.openBrowser("chrome");
+    }
     @Test
     void successfullyDragA2B(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/drag_and_drop");
+        Ak46Page dragDrop = new Ak46Page();
+        dragDrop.openDragAndDrop();
 
-        Actions actions = new Actions(driver);
+        Actions actions = new Actions(Browser.getDriver());
 
         actions
-                .dragAndDrop(driver.findElement(By.id("column-a")),driver.findElement(By.id("column-b")))
+                .dragAndDrop(dragDrop.getColumnA(),dragDrop.getColumnB())
                 .perform();
 
-        Assert.assertEquals(driver.findElement(By.id("column-a")).findElement(By.tagName("header")).getText(),"B");
-        Assert.assertEquals(driver.findElement(By.id("column-b")).findElement(By.tagName("header")).getText(),"A");
+        Assert.assertEquals(dragDrop.isTagNameA(),"A");
+        Assert.assertEquals(dragDrop.isTagNameB(),"B");
 
-        driver.quit();
+    }
+    @AfterClass
+    void tearDown(){
+        Browser.quit();
     }
 }
