@@ -1,8 +1,9 @@
 <suite name = "WebTable">
     <test name = "Chrome Browser">
         <classes>
-            <class name ="theinternet.Ak46Test"/>
-            <class name ="theinternet.FormAuthenticationTest"/>
+            <class name ="theInternet.WebTableTest"/>
+            <class name ="theInternet.WebTableTest"/>
+            <class name ="org.example.ExerciseTest"/>
         </classes>
     </test>
 </suite>

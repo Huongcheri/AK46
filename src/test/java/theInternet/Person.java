@@ -1,4 +1,4 @@
-package theinternet;
+package theInternet;
 
 public class Person {
     String firstName;

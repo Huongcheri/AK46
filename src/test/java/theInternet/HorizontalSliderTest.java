@@ -1,4 +1,4 @@
-package theinternet;
+package theInternet;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;

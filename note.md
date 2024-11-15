@@ -1,6 +1,6 @@
 # Selenium
 ``` java
-C:\Users\Admin\Maven\AK46\src\test\java\theinternet\HyperLinkTest.java
+C:\Users\Admin\Maven\AK46\src\test\java\theInternet\HyperLinkTest.java
 //    driver.findElement(By.linkText("here")).click();
         driver.navigate().back();
 ```

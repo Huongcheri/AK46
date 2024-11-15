@@ -1,11 +1,11 @@
-package theinternet;
+package theInternet;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import supports.Browser;
-import theinternet.pages.FormAuthenticationPage;
+import theInternet.pages.FormAuthenticationPage;
 
 public class FormAuthenticationTest {
     @BeforeClass

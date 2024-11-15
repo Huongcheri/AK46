@@ -1,4 +1,4 @@
-package theinternet;
+package theInternet;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -6,7 +6,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import supports.Browser;
-import theinternet.pages.Ak46Page;
+import theInternet.pages.Ak46Page;
 
 public class CheckboxTest {
     @BeforeClass
