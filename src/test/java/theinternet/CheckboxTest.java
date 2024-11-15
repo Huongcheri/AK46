@@ -14,7 +14,7 @@ public class CheckboxTest {
         Browser.openBrowser("chrome");
     }
     @Test
-    void Checkbox1isSelected() {
+    void checkbox1isSelected() {
 
         Ak46Page check = new Ak46Page();
         check.open();
@@ -26,7 +26,7 @@ public class CheckboxTest {
 
     }
     @Test
-    void Checkbox2isSelected() {
+    void checkbox2isSelected() {
         Ak46Page check = new Ak46Page();
         check.open();
         WebElement checkbox2 = check.getCheckbox2();

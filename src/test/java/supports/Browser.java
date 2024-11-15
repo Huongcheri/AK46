@@ -17,9 +17,9 @@ public class Browser {
 
         switch (browserName.toLowerCase()){
             case "chrome":{
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--headless=new");
-                driver = new ChromeDriver(chromeOptions);
+//                ChromeOptions chromeOptions = new ChromeOptions();
+//                chromeOptions.addArguments("--headless=new");
+                driver = new ChromeDriver();
                 break;
             }
             default:
@@ -39,6 +39,9 @@ public class Browser {
 
     public static WebDriver getDriver() {
         return driver;
+    }
+    public static void setWait(int second){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(second));
     }
 
 }

@@ -1,28 +1,33 @@
 package theinternet;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import supports.Browser;
+import theinternet.pages.Ak46Page;
 
 public class DropdownTest {
-    @Test
-    void Checkbox1isSelected() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/dropdown");
-        Select select = new Select(driver.findElement(By.id("dropdown")));
-        select.selectByValue("1");
-        Assert.assertTrue(driver.findElement(By.xpath("//*[@id='dropdown']/option[@value = '1']")).isSelected());
 
-        driver.quit();
+    @BeforeClass
+    void setUp(){
+        Browser.openBrowser("chrome");
     }
     @Test
-    void ableSelectMultipleOptions() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://output.jsbin.com/osebed/2");
-        Select select = new Select(driver.findElement(By.id("fruits")));
+    void Checkbox1isSelected() {
+        Ak46Page dropDrown = new Ak46Page();
+        dropDrown.openDropDown();
+
+        Select select = new Select(dropDrown.getDropDown());
+        select.selectByValue("1");
+        Assert.assertTrue(dropDrown.isSelected());
+    }
+    @Test
+    void ableSelectMultipleOptions() { // url nay k vao duoc
+        Ak46Page dropDrown = new Ak46Page();
+        dropDrown.openMulti();
+        Select select = new Select(dropDrown.getMulti());
 
         Assert.assertTrue(select.isMultiple());
         System.out.println(select.isMultiple());
@@ -30,19 +35,22 @@ public class DropdownTest {
         select.selectByVisibleText("Banana");
         select.selectByVisibleText("Apple");
         // verify able select banana and apple
-        Assert.assertTrue(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='banana']")).isSelected());
-        Assert.assertTrue(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='apple']")).isSelected());
+        Assert.assertTrue(dropDrown.getSelectedBanana().isSelected());
+        Assert.assertTrue(dropDrown.getSelectedApple().isSelected());
         // Deselect banana
         select.deselectByVisibleText("Banana");
         // verify able select banana and apple
-        Assert.assertFalse(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='banana']")).isSelected());
-        Assert.assertTrue(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='apple']")).isSelected());
+        Assert.assertFalse(dropDrown.getSelectedBanana().isSelected());
+        Assert.assertTrue(dropDrown.getSelectedApple().isSelected());
         // deselect all
         select.deselectAll();
-        Assert.assertFalse(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='banana']")).isSelected());
-        Assert.assertFalse(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='apple']")).isSelected());
-        Assert.assertFalse(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='orange']")).isSelected());
-        Assert.assertFalse(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='grape']")).isSelected());
-        driver.quit();
+        Assert.assertFalse(dropDrown.getSelectedBanana().isSelected());
+        Assert.assertFalse(dropDrown.getSelectedApple().isSelected());
+        Assert.assertFalse(dropDrown.getSelectedOrange().isSelected());
+        Assert.assertFalse(dropDrown.getSelectedGrape().isSelected());
+    }
+    @AfterClass
+    void tearDown(){
+        Browser.quit();
     }
 }
