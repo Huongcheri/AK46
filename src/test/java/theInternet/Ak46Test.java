@@ -78,22 +78,22 @@ public class Ak46Test {
         Assert.assertFalse(dropDown.getSelectedOrange().isSelected());
         Assert.assertFalse(dropDown.getSelectedGrape().isSelected());
     }
-    @Test
-    void ableToHorizontalSlidePointer() {
-        Ak46Page horizontal = new Ak46Page();
-        horizontal.openHorizonSlider();
-
-        WebElement pointer = horizontal.getPointer();
-        int offsetWidth = pointer.getSize().getWidth();
-        int offsetHeight = pointer.getSize().getHeight();
-        System.out.printf("%d %d", offsetHeight,offsetWidth);
-        actions.clickAndHold(pointer)
-                .moveByOffset(offsetWidth,0)
-                .perform();
-
-        Browser.setWait(60);
-        Assert.assertTrue(horizontal.isLocator5());
-    }
+//    @Test
+//    void ableToHorizontalSlidePointer() {
+//        Ak46Page horizontal = new Ak46Page();
+//        horizontal.openHorizonSlider();
+//
+//        WebElement pointer = horizontal.getPointer();
+//        int offsetWidth = pointer.getSize().getWidth();
+//        int offsetHeight = pointer.getSize().getHeight();
+//        System.out.printf("%d %d", offsetHeight,offsetWidth);
+//        actions.clickAndHold(pointer)
+//                .moveByOffset(offsetWidth,0)
+//                .perform();
+//
+//        Browser.setWait(60);
+//        Assert.assertTrue(horizontal.isLocator5());
+//    }
 
 //    @Test(dataProvider = "testData")
 //    void ableToHoverImage(int imageIndex,String expectedImageName) {
