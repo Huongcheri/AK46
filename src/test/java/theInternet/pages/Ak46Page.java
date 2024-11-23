@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import supports.Browser;
 
 import static supports.Browser.wait;
@@ -49,36 +50,36 @@ public class Ak46Page {
         return driver.findElement(columnB).findElement(By.tagName("header")).getText();
     }
 
-    By valueDropDown = By.xpath("//*[@id='dropdown']/option[@value = '1']");
-    By listDropDown = By.id("dropdown");
+
+
     public void openDropDown(){
         driver.get("https://the-internet.herokuapp.com/dropdown");
     }
-    public WebElement getDropDown(){
-        return driver.findElement(listDropDown);
+    public void selectOption(String option){
+        Select select = new Select(driver.findElement(By.id("dropdown")));
+        select.selectByValue(option);
     }
-    public  boolean isSelected(){
-        return driver.findElement(valueDropDown).isSelected();
+    public  boolean isSelected(String option){
+        return driver.findElement(By.xpath(String.format("//*[@id='dropdown']/option[@value = '%s']",option))).isSelected();
     }
+
+
     public void openMulti(){
         driver.get("https://output.jsbin.com/osebed/2");
     }
-    public WebElement getMulti(){
-        return driver.findElement(By.id("fruits"));
+    public void selectMulti(String option){
+        Select select = new Select(driver.findElement(By.id("fruits")));
+        select.selectByVisibleText(option);
+    }
+    public void deSelectMulti(String option){
+        Select select = new Select(driver.findElement(By.id("fruits")));
+        select.selectByVisibleText(option);
+    }
+    public boolean isSelectedOption(String option){
+        return driver.findElement(By.xpath(String.format("//option[@value='%s']",option))).isSelected();
     }
 
-    public  WebElement getSelectedBanana(){
-        return driver.findElement(By.xpath("//*[@id='fruits']/option[@value='banana']"));
-    }
-    public  WebElement getSelectedApple(){
-        return driver.findElement(By.xpath("//*[@id='fruits']/option[@value='apple']"));
-    }
-    public  WebElement getSelectedOrange(){
-        return driver.findElement(By.xpath("//*[@id='fruits']/option[@value='orange']"));
-    }
-    public  WebElement getSelectedGrape(){
-        return driver.findElement(By.xpath("//*[@id='fruits']/option[@value='grape']"));
-    }
+
     public void openHorizonSlider(){
         driver.get("https://the-internet.herokuapp.com/horizontal_slider");
     }

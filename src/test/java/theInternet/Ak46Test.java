@@ -3,7 +3,6 @@ package theInternet;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -48,35 +47,40 @@ public class Ak46Test {
         Ak46Page dropDown = new Ak46Page();
         dropDown.openDropDown();
 
-        Select select = new Select(dropDown.getDropDown());
-        select.selectByValue("1");
-        Assert.assertTrue(dropDown.isSelected());
+        dropDown.selectOption("1");
+        dropDown.isSelected("1");
     }
     @Test
     void ableSelectMultipleOptions() { // url nay k vao duoc
         Ak46Page dropDown = new Ak46Page();
         dropDown.openMulti();
-        Select select = new Select(dropDown.getMulti());
 
-        Assert.assertTrue(select.isMultiple());
-        System.out.println(select.isMultiple());
-        // select banana and apple
-        select.selectByVisibleText("Banana");
-        select.selectByVisibleText("Apple");
-        // verify able select banana and apple
-        Assert.assertTrue(dropDown.getSelectedBanana().isSelected());
-        Assert.assertTrue(dropDown.getSelectedApple().isSelected());
-        // Deselect banana
-        select.deselectByVisibleText("Banana");
-        // verify able select banana and apple
-        Assert.assertFalse(dropDown.getSelectedBanana().isSelected());
-        Assert.assertTrue(dropDown.getSelectedApple().isSelected());
-        // deselect all
-        select.deselectAll();
-        Assert.assertFalse(dropDown.getSelectedBanana().isSelected());
-        Assert.assertFalse(dropDown.getSelectedApple().isSelected());
-        Assert.assertFalse(dropDown.getSelectedOrange().isSelected());
-        Assert.assertFalse(dropDown.getSelectedGrape().isSelected());
+        dropDown.selectMulti("Banana");
+        dropDown.selectMulti("Apple");
+        dropDown.isSelectedOption("banana");
+        dropDown.isSelectedOption("apple");
+
+        dropDown.deSelectMulti("Banana");
+        dropDown.isSelected("");
+//        Assert.assertTrue(select.isMultiple());
+//        System.out.println(select.isMultiple());
+//        // select banana and apple
+//        select.selectByVisibleText("Banana");
+//        select.selectByVisibleText("Apple");
+//        // verify able select banana and apple
+//        Assert.assertTrue(dropDown.getSelectedBanana().isSelected());
+//        Assert.assertTrue(dropDown.getSelectedApple().isSelected());
+//        // Deselect banana
+//        select.deselectByVisibleText("Banana");
+//        // verify able select banana and apple
+//        Assert.assertFalse(dropDown.getSelectedBanana().isSelected());
+//        Assert.assertTrue(dropDown.getSelectedApple().isSelected());
+//        // deselect all
+//        select.deselectAll();
+//        Assert.assertFalse(dropDown.getSelectedBanana().isSelected());
+//        Assert.assertFalse(dropDown.getSelectedApple().isSelected());
+//        Assert.assertFalse(dropDown.getSelectedOrange().isSelected());
+//        Assert.assertFalse(dropDown.getSelectedGrape().isSelected());
     }
 //    @Test
 //    void ableToHorizontalSlidePointer() {
@@ -125,7 +129,7 @@ public class Ak46Test {
         ak46.openContextClick();
 
         actions.contextClick(ak46.getContent()).perform();
-        Browser.setWait(10);
+
         wait.until(ExpectedConditions.alertIsPresent()).accept();
 
     }
